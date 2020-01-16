@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -64,17 +65,6 @@ def direction_choices(current_position="none", cmd="none"):
             if el !=None:
                 print(f"From here you have a choice: You can go {direction} to the {el}..")
         
-    
-    
-
-def player_choices(player_choice):
-    if player_choice == "n" and room['outside']:
-        p1.room = p1.room.n_to
-        print(f"You are now in {p1.room.name}. {p1.room.description}")
-        direction_choices()
-        # print(f"From here you have a few choices you can go to the {p1.room.n_to.name}")
-        # print(f"From here you have a few choices you can go to the {p1.room.n_to.name}, the {p1.room.s_to} or the {p1.room.e_to}..")
-
 
 print("Welcome to my Text Based Adventure Game")
 print(f"Your name is {p1.name} and you are currently in the {p1.room.name}") #can we make this more dynamic?
@@ -88,7 +78,6 @@ choices = ["n", "s", "e", "w"]
 while True:
     cmd = input(f'Please choose {choices[0]} for North, {choices[1]} for South, {choices[2]} for East, or {choices[3]} for West to proceed.. If you have finished your adventure press q to quit ->')
     if cmd in choices:
-        # print(f"You chose {cmd} ")
         if cmd == "n":
             if p1.room == room['outside']:
                 p1.room = p1.room.n_to
