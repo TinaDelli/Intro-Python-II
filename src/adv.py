@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -38,6 +39,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+p1 = Player("Charlie", room['outside'])
 
 # Write a loop that:
 #
@@ -49,3 +51,48 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+def direction_choices(current_position="none", cmd="none"):
+    if current_position == "none" and cmd == "none":
+        available_directions = p1.room.change_direction()
+        
+        for el in available_directions:
+            if el !=None:
+                print(f"From here you have a choice: You can go to the {el}..")
+        
+    
+    
+
+def player_choices(player_choice):
+    if player_choice == "n" and room['outside']:
+        p1.room = p1.room.n_to
+        print(f"You are now in {p1.room.name}. {p1.room.description}")
+        direction_choices()
+        # print(f"From here you have a few choices you can go to the {p1.room.n_to.name}")
+
+
+
+print("Welcome to my Text Based Adventure Game")
+print(f"Your name is {p1.name} and you are currently in the {p1.room.name}") #can we make this more dynamic?
+print(room['outside'].description)
+direction_choices()
+print("Your choices matter here so choose wisely")
+
+choices = ["n", "s", "e", "w"]
+# directions = [n.to, s_to, e_to, w_to]
+
+while True:
+    cmd = input(f'Please choose {choices[0]} for North, {choices[1]} for South, {choices[2]} for East, or {choices[3]} for West to proceed.. If you have finished your adventure press q to quit ->')
+    if cmd in choices:
+        # print(f"You chose {cmd} ")
+        if cmd == "n" and p1.room == room['outside']:
+            p1.room = p1.room.n_to
+            print(f"You are now in {p1.room.name}. {p1.room.description}")
+            direction_choices()
+            # print(f"From here you have a few choices you can go to the {p1.room.n_to.name}, the {p1.room.s_to} or the {p1.room.e_to}..")
+        
+    elif cmd == "q":
+        print("Thanks for adventuring please quest again")
+        break
+    else:
+        print(f"That is not an option, please choose from {choices} to proceed")
