@@ -73,7 +73,7 @@ def player_choices(player_choice):
         print(f"You are now in {p1.room.name}. {p1.room.description}")
         direction_choices()
         # print(f"From here you have a few choices you can go to the {p1.room.n_to.name}")
-
+        # print(f"From here you have a few choices you can go to the {p1.room.n_to.name}, the {p1.room.s_to} or the {p1.room.e_to}..")
 
 
 print("Welcome to my Text Based Adventure Game")
@@ -89,12 +89,54 @@ while True:
     cmd = input(f'Please choose {choices[0]} for North, {choices[1]} for South, {choices[2]} for East, or {choices[3]} for West to proceed.. If you have finished your adventure press q to quit ->')
     if cmd in choices:
         # print(f"You chose {cmd} ")
-        if cmd == "n" and p1.room == room['outside']:
-            p1.room = p1.room.n_to
-            print(f"You are now in {p1.room.name}. {p1.room.description}")
-            direction_choices()
-            # print(f"From here you have a few choices you can go to the {p1.room.n_to.name}, the {p1.room.s_to} or the {p1.room.e_to}..")
-        
+        if cmd == "n":
+            if p1.room == room['outside']:
+                p1.room = p1.room.n_to
+                print(f"You are now in {p1.room.name}. {p1.room.description}")
+                direction_choices()
+            elif p1.room == room['foyer']:
+                p1.room = p1.room.n_to
+                print(f"You are now in {p1.room.name}. {p1.room.description}")
+                direction_choices()
+            elif p1.room == room['narrow']:
+                p1.room = p1.room.n_to
+                print(f"You are now in {p1.room.name}. {p1.room.description}")
+                direction_choices()
+            else:
+                print("There is no path this way, if you continue you will surely die, go back at once")
+                direction_choices()
+        elif cmd == "s":
+            if p1.room == room['foyer']:
+                p1.room = p1.room.s_to
+                print(f"You are now in {p1.room.name}. {p1.room.description}")
+                direction_choices()
+            elif p1.room == room['overlook']:
+                p1.room = p1.room.s_to
+                print(f"You are now in {p1.room.name}. {p1.room.description}")
+                direction_choices()
+            elif p1.room == room['treasure']:
+                p1.room = p1.room.s_to
+                print(f"You are now in {p1.room.name}. {p1.room.description}")
+                direction_choices()
+            else:
+                print("There is no path this way, if you continue you will surely die, go back at once")
+                direction_choices()
+        elif cmd == "e":
+            if p1.room == room['foyer']:
+                p1.room = p1.room.e_to
+                print(f"You are now in {p1.room.name}. {p1.room.description}")
+                direction_choices()
+            else:
+                print("There is no path this way, if you continue you will surely die, go back at once")
+                direction_choices()
+        elif cmd == "w":
+            if p1.room == room['narrow']:
+                p1.room = p1.room.w_to
+                print(f"You are now in {p1.room.name}. {p1.room.description}")
+                direction_choices()
+            else:
+                print("There is no path this way, if you continue you will surely die, go back at once")
+                direction_choices()       
     elif cmd == "q":
         print("Thanks for adventuring please quest again")
         break
