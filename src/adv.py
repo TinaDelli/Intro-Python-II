@@ -62,7 +62,7 @@ p1 = Player(input("Please enter your name: -> ").capitalize(), room['outside'])
 print("Welcome to my Text Based Adventure Game")
 print(f"Your name is {p1.name} and you are currently in the {p1.room.name}") 
 print(room['outside'].description)
-print(f'{p1.room.get_rooms_string()} to the {p1.room.change_direction().name}') #can we make this more dynamic
+print(f'{p1.room.get_rooms_string()}')
 print("Your choices matter here so choose wisely")
 
 choices = ["n", "s", "e", "w"]
@@ -72,7 +72,7 @@ while True:
     if cmd in choices:
         p1.move(cmd)  
         p1.room.get_rooms_string()
-        print(f'{p1.room.get_rooms_string()} to the {p1.room.change_direction().name}')         
+        print(f'{p1.room.get_rooms_string()}')         
     elif cmd == "q":
         print("Thanks for adventuring please quest again")
         break #or exit()

@@ -23,13 +23,13 @@ class Room:
     def get_rooms(self):
         rooms = []
         if self.n_to:
-            rooms.append("north")
+            rooms.append(f"north to the {self.n_to.name}")
         if self.s_to:
-            rooms.append("south")
+            rooms.append(f"south to the {self.s_to.name}")
         if self.e_to:
-            rooms.append("east")
+            rooms.append(f"east to the {self.e_to.name}")
         if self.w_to:
-            rooms.append("west")
+            rooms.append(f"west to the {self.w_to.name}")
         return rooms
     def get_rooms_string(self):
         return f"You can go {', '.join(self.get_rooms())}"
