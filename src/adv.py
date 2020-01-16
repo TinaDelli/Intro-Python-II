@@ -55,10 +55,14 @@ p1 = Player("Charlie", room['outside'])
 def direction_choices(current_position="none", cmd="none"):
     if current_position == "none" and cmd == "none":
         available_directions = p1.room.change_direction()
-        
+        direction = "direction"
         for el in available_directions:
+            if el == p1.room.n_to: direction = "north"
+            if el == p1.room.s_to: direction = "south"
+            if el == p1.room.e_to: direction = "east"
+            if el == p1.room.w_to: direction = "west"
             if el !=None:
-                print(f"From here you have a choice: You can go to the {el}..")
+                print(f"From here you have a choice: You can go {direction} to the {el}..")
         
     
     
