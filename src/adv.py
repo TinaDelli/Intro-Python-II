@@ -2,19 +2,14 @@ from room import Room
 from player import Player
 from item import Item
 
-item1 = Item("sword", "strong, shiny, useful")
-item2 = Item("torch", "lights the way")
-item3 = Item("shield", "protects from danger")
-item4 = Item("potion", "restores health")
-
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", [item1, item2]),
+                     "North of you, the cave mount beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east.""", [item1, item2]),
+passages run north and east."""),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
@@ -39,6 +34,17 @@ room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
+
+
+item1 = Item("sword", "strong, shiny, useful")
+item2 = Item("torch", "lights the way")
+item3 = Item("shield", "protects from danger")
+item4 = Item("potion", "restores health")
+
+room['outside'].items.append(item1)
+room['outside'].items.append(item2)
+room['foyer'].items.append(item3)
+room['foyer'].items.append(item4)
 
 #
 # Main
@@ -66,13 +72,25 @@ print(f'{p1.room.get_rooms_string()}')
 print("Your choices matter here so choose wisely")
 
 choices = ["n", "s", "e", "w"]
+acquire = ["get", "take"]
+relinquish = ["drop"]
 
 while True:
     cmd = input(f'Please choose {choices[0]} for North, {choices[1]} for South, {choices[2]} for East, or {choices[3]} for West to proceed.. If you have finished your adventure press q to quit ->').lower()
+    first_word = cmd.split()[0]
     if cmd in choices:
         p1.move(cmd)  
         p1.room.get_rooms_string()
-        print(f'{p1.room.get_rooms_string()}')         
+        print(f'{p1.room.get_rooms_string()}')
+    elif first_word in acquire:
+        second_word = cmd.split()[1]
+        if p1.room.get_items().__contains__(second_word):
+            p1.room.remove_item(f"{cmd.split()[1]}")
+            p1.on_take(cmd.split()[1])
+            print(f'This room now contains: {p1.room.get_items_string()}')
+    elif first_word in relinquish:
+        second_word = cmd.split()[1]
+        print(f'You sly dog you did it yo, you got {cmd}')        
     elif cmd == "q":
         print("Thanks for adventuring please quest again")
         break #or exit()

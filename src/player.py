@@ -13,4 +13,12 @@ class Player:
             self.room = next_room
             print(self.room)
         else:
-            print("There is no path this way, if you continue you will surely die, go back at once")   
+            print("There is no path this way, if you continue you will surely die, go back at once") 
+    def get_inventory(self):
+        inventory_list = []
+        for i in self.inventory:
+            inventory_list.append(i) 
+        return inventory_list 
+    def on_take(self, new_item):
+        self.inventory.append(new_item)
+        print(f'You just picked up: {self.get_inventory()}')
